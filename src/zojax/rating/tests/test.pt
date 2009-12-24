@@ -1,0 +1,2 @@
+
+<h1 tal:content="context/title"></h1>

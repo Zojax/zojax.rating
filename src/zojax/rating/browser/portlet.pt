@@ -1,0 +1,19 @@
+<div class="z-portlet portlet-rating" i18n:domain="zojax.rating">
+  <h2 class="z-portlet-header" i18n:translate="">
+    Rating
+  </h2>
+  <div class="z-portlet-body">
+    <div class="z-portlet-item">
+      <div tal:condition="view/average" tal:attributes="class string:ratingstars n${view/averageAsString}"></div> 
+      <form method="post" id="rate-form" name="rate-form" tal:condition="view/allowRate"
+            tal:attributes="action string:${view/contextURL}/@@rate">
+        <input type="hidden" name="form.buttons.rate" value="Rate" />
+        <label for="form-widgets-sortBy" tal:content="view/form/widgets/rate/label" />
+        <tal:block replace="structure view/form/widgets/rate/render" />
+      </form>
+      <script type="text/javascript">
+        $("#form-widgets-rate").change(function() {$("#rate-form").submit();});
+      </script>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.rating">
+
+  <!-- rating portlet -->
+  <zojax:portlet
+     name="portlet.rating"
+     title="Rating"
+     template="portlet.pt"
+     class=".portlet.RatingPortlet" />
+
+  <browser:page
+     for="lovely.rating.interfaces.IRatable"
+     name="rate"
+     class=".rate.RateForm"
+     permission="zojax.rating.Rate" />
+
+</configure>
