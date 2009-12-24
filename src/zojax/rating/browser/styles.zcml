@@ -1,0 +1,21 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.rating">
+
+  
+  <zojax:resourcedirectory
+     name="zojax-rating-images"
+     directory="images" />
+
+  <!-- styles -->
+  <zojax:resourceinclude
+     name="zojax-rating.css"
+     library="zojax"
+     type="stylesheet"
+     standalone="yes"
+     file="styles.css"
+     filetype="zrt" />
+
+</configure>

@@ -1,0 +1,117 @@
+============
+zojax rating
+============
+
+    >>> from zope import component, interface
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zojax.extensions.interfaces import IExtensible
+    >>> from zope.app.testing.functional import getRootFolder
+    >>> from zojax.rating.tests.tests import TestContent
+
+    >>> root = getRootFolder()
+    >>> interface.alsoProvides(root, IExtensible)
+
+Install rating product
+
+    >>> admin = Browser()
+    >>> admin.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> admin.open('http://localhost/settings/')
+    >>> admin.getLink('Products management').click()
+    >>> admin.getControl(name="availproducts:list").value = ['blogger']
+    >>> admin.getControl('Install').click()
+
+change portlet settings
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> actor.open("http://localhost/++extensions++/")
+    >>> actor.getLink('Portlets').click()
+
+set portlets manager
+
+    >>> actor.getLink('Left column portlets').click()
+    >>> actor.open('http://localhost/++extensions++/portlets/columns.left/?form.widgets.portletIds:list=portlet.rating&form.buttons.save=Save&form.widgets.status=1')
+
+Add test content
+
+    >>> content = TestContent(title=u'Test content')
+    >>> content.text = u'Test content body text.'
+    >>> root['content'] = content
+
+Test rating form
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> actor.open("http://localhost/content/index.html")
+    >>> print actor.contents
+    <html>
+    ...
+    <div class="z-portlet portlet-rating">
+    ...
+    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
+    ...
+    </html>
+    >>> actor.getControl(name="form.widgets.rate:list").value
+    ['--']
+    >>> actor.getControl(name="form.widgets.rate:list").value = ['4']
+    >>> actor.getForm(name='rate-form').submit()
+    >>> print actor.contents
+    <html>
+    ...
+    <div><div class="statusMessage">Your rating was saved</div>...
+    ...
+    <div class="z-portlet portlet-rating">
+    ...
+    <div class="ratingstars n4_0"></div>
+    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
+    ...
+    <option id="form-widgets-rate-2" value="4" selected="selected">4</option>
+    ...
+    </html>
+
+Test rating by another user
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic user:userpw")
+    >>> actor.open("http://localhost/content/index.html")
+    >>> actor.getControl(name="form.widgets.rate:list").value = ['3']
+    >>> actor.getForm(name='rate-form').submit()
+    >>> print actor.contents
+    <html>
+    ...
+    <div><div class="statusMessage">Your rating was saved</div>...
+    ...
+    <div class="z-portlet portlet-rating">
+    ...
+    <div class="ratingstars n3_5"></div>
+    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
+    ...
+    <option id="form-widgets-rate-3" value="3" selected="selected">3</option>
+    ...
+    </html>
+    
+Test remove rating
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> actor.open("http://localhost/content/index.html")
+    >>> actor.getControl(name="form.widgets.rate:list").value = ['--']
+    >>> actor.getForm(name='rate-form').submit()
+    >>> print actor.contents
+    <html>
+    ...
+    <div><div class="statusMessage">Your rating was saved</div>...
+    ...
+    <div class="z-portlet portlet-rating">
+    ...
+    <div class="ratingstars n3_0"></div>
+    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
+    ...
+    <option id="form-widgets-rate-0" value="--" selected="selected">--</option>
+    ...
+    </html>
+        

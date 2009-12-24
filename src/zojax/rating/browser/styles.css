@@ -1,0 +1,56 @@
+/* zrt-cssregistry: */
+
+@media all {
+
+  .ratingstars {
+    height: 18px;
+    width: 86px;
+    background: url(zojax-rating-images/stars-00.png) 50% 50% no-repeat;
+    margin: 5px 0px;
+  }
+
+  .ratingstars.n0_0 {
+    background-image: url(zojax-rating-images/stars-00.png);
+  }
+  
+  .ratingstars.n0_5 {
+    background-image: url(zojax-rating-images/stars-05.png);
+  }
+  
+  .ratingstars.n1_0 {
+    background-image: url(zojax-rating-images/stars-10.png);
+  }
+  
+  .ratingstars.n1_5 {
+    background-image: url(zojax-rating-images/stars-15.png);
+  }
+  
+  .ratingstars.n2_0 {
+    background-image: url(zojax-rating-images/stars-20.png);
+  }
+  
+  .ratingstars.n2_5 {
+    background-image: url(zojax-rating-images/stars-25.png);
+  }
+  
+  .ratingstars.n3_0 {
+    background-image: url(zojax-rating-images/stars-30.png);
+  }
+  
+  .ratingstars.n3_5 {
+    background-image: url(zojax-rating-images/stars-35.png);
+  }
+  
+  .ratingstars.n4_0 {
+    background-image: url(zojax-rating-images/stars-40.png);
+  }
+  
+  .ratingstars.n4_5 {
+    background-image: url(zojax-rating-images/stars-45.png);
+  }
+  
+  .ratingstars.n5_0 {
+    background-image: url(zojax-rating-images/stars-50.png);
+  }
+
+}

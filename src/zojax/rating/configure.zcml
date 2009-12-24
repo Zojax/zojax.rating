@@ -1,0 +1,43 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.rating">
+
+  <zojax:product
+     name="rating"
+     title="Rating"
+     description="Allow rating of portal content."
+     schema=".interfaces.IRatingProduct"
+     configurable="false" />
+
+  <permission
+     id="zojax.rating.Rate"
+     title="Rate Content"
+     description="Allow to rate portal content." />
+
+  <utility
+     component=".rating.overallRatingDefinition"
+     provides="lovely.rating.interfaces.IRatingDefinition"
+     name="overall" />
+
+  <registerIn registry="zojax.product.rating">
+
+    <zojax:permission
+       permission="zojax.rating.Rate"
+       category="zojax.content.permissions.interfaces.IGeneralSettingsPermission" />
+
+    <zojax:contentpermission
+       permission="zojax.rating.Rate"
+       managepermission="zojax.ManagePermissions"
+       for="zojax.content.space.interfaces.IRootSpace"
+       category="zojax.content.permissions.interfaces.IGeneralSettingsPermission" />
+
+    <adapter factory=".average.AverageRating" />
+
+    <include package=".browser" />
+
+  </registerIn>
+  
+  <include package=".browser" file="styles.zcml" />
+
+</configure>
