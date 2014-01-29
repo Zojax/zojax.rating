@@ -48,9 +48,7 @@ Test rating form
     >>> print actor.contents
     <html>
     ...
-    <div class="z-portlet portlet-rating">
-    ...
-    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
+          <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
     ...
     </html>
     >>> actor.getControl(name="form.widgets.rate:list").value
@@ -60,16 +58,15 @@ Test rating form
     >>> print actor.contents
     <html>
     ...
-    <div><div class="statusMessage">Your rating was saved</div>...
+        <div><div class="statusMessage">Your rating was saved</div>
     ...
-    <div class="z-portlet portlet-rating">
+          <div class="ratingstars n4_0"></div>
+          <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
     ...
-    <div class="ratingstars n4_0"></div>
-    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
-    ...
-    <option id="form-widgets-rate-2" value="4" selected="selected">4</option>
+    ...selected="selected">4</option>
     ...
     </html>
+
 
 Test rating by another user
 
@@ -82,17 +79,16 @@ Test rating by another user
     >>> print actor.contents
     <html>
     ...
-    <div><div class="statusMessage">Your rating was saved</div>...
+        <div><div class="statusMessage">Your rating was saved</div>
     ...
-    <div class="z-portlet portlet-rating">
+          <div class="ratingstars n3_5"></div>
+          <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
     ...
-    <div class="ratingstars n3_5"></div>
-    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
-    ...
-    <option id="form-widgets-rate-3" value="3" selected="selected">3</option>
+    ...selected="selected">3</option>
     ...
     </html>
-    
+
+
 Test remove rating
 
     >>> actor = Browser()
@@ -104,14 +100,10 @@ Test remove rating
     >>> print actor.contents
     <html>
     ...
-    <div><div class="statusMessage">Your rating was saved</div>...
+        <div><div class="statusMessage">Your rating was saved</div>
     ...
-    <div class="z-portlet portlet-rating">
+          <div class="ratingstars n3_0"></div>
     ...
-    <div class="ratingstars n3_0"></div>
-    <form method="post" id="rate-form" name="rate-form" action="http://localhost/content/@@rate">
-    ...
-    <option id="form-widgets-rate-0" value="--" selected="selected">--</option>
+    ...selected="selected">--</option>
     ...
     </html>
-        

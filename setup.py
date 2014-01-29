@@ -70,6 +70,7 @@ setup(name = 'zojax.rating',
                                   'zope.app.zcmlfiles',
                                   'zojax.autoinclude',
                                   'zojax.security',
+                                  'zojax.pageelement',
                                   ]),
       include_package_data = True,
       zip_safe = False
